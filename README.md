@@ -6,9 +6,6 @@ The **EVPV-simulator** (Electric Vehicles – PhotoVoltaics Simulator) is an ope
 
 - 📖 [**Full Documentation**](https://evpv-simulator.readthedocs.io/en/latest/): User guide, API, and workflow documentation
 - 💻 [**Project GitHub**](https://github.com/evpv-simulator): Access source code and examples
-- 📫 **Contact**: jeremy.dumoulin[at]epfl[dot]ch
-- 🧑‍🔬 Authors: Jérémy Dumoulin, Alejandro Peña-Bello, Noémie Jeannin, Nicolas Wyrsch
-- 🏢 Lead Institution: EPFL PV-LAB, Switzerland
 - 🐍 Language: Python 3.12
 
 ---
@@ -130,6 +127,7 @@ Check our [Questions & Answers](docs/faq.md) page for common issues and guidance
 ## 📜 License
 
 Distributed under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html).
-
+Originally developed under the lead of EPFL PV-LAB (Switzerland). Authors involved: Jérémy Dumoulin, Alejandro Peña-Bello, Noémie Jeannin, Nicolas Wyrsch.
+Now under the maintenance of the [African Energy Modelling Network](https://africanenergymodellingnetwork.net/en/home).
 
 
