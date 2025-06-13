@@ -1,97 +1,120 @@
-# 🧰 EV-PV Model – Training Section
+# 🚗 EVPV-simulator
 
-## 📘 Introduction
+## 📚 Documentation & Training Material
 
-The **EV-PV model** is designed to support decision-making and strategic planning for electric mobility within a given region. Initially developed within the [Citiwatts platform](https://citiwatts.eu/), the model has been transformed into a standalone tool, with expanded functionalities specifically adapted for Africa's transport and energy landscape.
+The **EVPV-simulator** (Electric Vehicles – PhotoVoltaics Simulator) is an open-source Python tool developed at EPFL PV-LAB to simulate the spatial and temporal charging needs of privately owned electric vehicles (EVs) and match them with local solar photovoltaic (PV) generation. Designed for urban environments with limited mobility data, it combines georeferenced datasets with spatial trip distribution models and uses [PVLib](https://pvlib-python.readthedocs.io/en/stable/) for solar generation modeling.
 
-EV-PV integrates multiple geospatial and technical components to:
+- 📖 [**Full Documentation**](https://evpv-simulator.readthedocs.io/en/latest/): User guide, API, and workflow documentation
+- 💻 [**Project GitHub**](https://github.com/evpv-simulator): Access source code and examples
+- 📫 **Contact**: jeremy.dumoulin[at]epfl[dot]ch
+- 🧑‍🔬 Authors: Jérémy Dumoulin, Alejandro Peña-Bello, Noémie Jeannin, Nicolas Wyrsch
+- 🏢 Lead Institution: EPFL PV-LAB, Switzerland
+- 🐍 Language: Python 3.12
 
-- Analyze **passenger mobility demand**,
-- Estimate **EV charging needs**,
-- Evaluate the **potential of photovoltaic (PV)** energy to meet such needs,
-- Determine **required charging infrastructure**.
+---
 
-The tool can function entirely on **open geospatial datasets**, making it particularly suitable for **data-scarce environments**. It supports various PV installation types, including **rooftop** and **free-standing** systems.
+## 🧠 Model Overview
 
-⚠ **Note on the African context**: Within the OM4A project, EV-PV model has undergone numerous updates to reflect African-specific transport modes, vehicle fleets, and data limitations.
+The EVPV-simulator provides three key simulation outputs:
 
+1. **Mobility Demand Estimation** – Using population density, workplace, and POI data, it divides the city into traffic zones and simulates home-to-work commuting patterns.
+2. **Charging Demand Calculation** – Based on vehicle parameters, SoC logic, and user-defined charging habits (home, work, POIs), the model estimates zone-level and hourly charging needs.
+3. **EV–PV Complementarity** – Calculates hourly PV production using PVLib and evaluates self-consumption/self-sufficiency based on spatial-temporal match with EV charging.
 
+<img src="docs/model_overview_3.png" width="100%">
+<p><font size="-1">🔁 EVPV-simulator overview – Not all inputs/outputs shown.</font></p>
 
-## 🎯 Scope of the EV-PV Model
+---
 
-- **Objective**: Strategic planning of EV charging infrastructure and PV integration.
-- **Platform**: Based on the open-source [Citiwatts](https://citiwatts.net) and originally from the ERANET OpenGIS4ET project.
-- **Technological Scope**: Currently focused on **passenger cars**, the dominant road transport mode in Europe.
-- **Geographical Scope**: Applicable globally, as long as data is available. Spatial resolution can reach **hectare-level granularity**.
-- **Temporal Scope**: Data is analyzed primarily on a **daily** basis.
+## ⚙️ Installation
 
+### 🐍 Python Setup
 
+We recommend using **Miniconda**:
+- Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html) and create a virtual environment:
 
-
-## 🔍 Model Features
-
-EV-PV provides a modular workflow structured around three core features:
-
-### 1. **EV Charging Demand Assessment**
-
-- Calculates the **spatial distribution** of daily EV charging needs.
-- Based on **population**, **mobility habits**, and **vehicle technical data**.
-- Customizable by users to run **"what-if" analyses**.
-
-🖼️ *Insert here: **``** - Daily charging demand map (example: Milano)*
-
-```markdown
-![Figure 9: Daily charging demand map](path/to/figure9.png)
+```bash
+conda create --name evpv-env python=3.12
+conda activate evpv-env
 ```
 
-### 2. **Charging Infrastructure Deployment**
+### 📦 Install EVPV-simulator
 
-- Determines the **density and optimal placement** of charging stations.
-- Scenarios include **charging at home, work, and POIs**.
-- Allows analysis of **PV-to-vehicle schemes** (PV-V), with other schemes (e.g., grid integration, vehicle-to-X) in development.
-
-### 3. **Coupling with Photovoltaic (PV) Systems**
-
-- Supports evaluation of **PV potential** to power EV infrastructure.
-- Enables planning for **residential PV** and future grid-coupled systems.
-
-
-
-## 🧾 Model Inputs and Outputs
-
-🖼️ *Insert here: **``** - EV-PV Inputs and Outputs Diagram*
-
-```markdown
-![Figure 10: EV-PV Inputs and Outputs](path/to/figure10.png)
+```bash
+pip install git+https://github.com/evpv-simulator/evpv.git
 ```
 
-### 🔽 Key Inputs
+---
 
-1. **Demographic Data**: Population layers with high spatial resolution.
-2. **Mobility Patterns**: Daily transport habits, region-specific.
-3. **Vehicle Data**: Technical characteristics of local vehicle fleets.
-4. **Geospatial Layers**: Roads, POIs, PV potential maps.
+## ▶️ How to Run EVPV-simulator
 
-### 🔼 Key Outputs
+### 🔹 Step 1: Prepare Your Config File
+- Copy and adapt the [Addis Ababa example](https://github.com/evpv-simulator/evpv-examples)
+- Make sure geospatial inputs are ready: region boundary, population raster, workplace list, POIs
 
-- Maps of **EV charging demand** (in kWh/day or similar units).
-- Optimized **locations of charging stations**.
-- Evaluations of **PV coupling potential** (location-specific).
+### 🔹 Step 2: Run the CLI Model
+```bash
+evpv
+```
+Then enter the path to your config file when prompted.
 
+### ⚠️ Notes:
+- Use **absolute paths** or launch the terminal in the config file directory
+- Recommended: Start by running the **Addis Ababa example** to familiarize yourself with outputs
 
+---
 
-## 🌍 Relevance for Africa
+## 🗂️ Input Requirements
 
-In many African regions:
+- **Region boundary**: GeoJSON file from sources like [GADM](https://gadm.org)
+- **Population density**: Raster from [GHS-POP](https://human-settlement.emergency.copernicus.eu)
+- **Workplaces & POIs**: CSV with lat/lon and weight. Can be auto-generated via OSM script.
 
-- **Private cars are not the primary mode of transport**,
-- **Vehicle fleets and mobility behaviors differ** significantly,
-- **PV deployment often includes off-grid and mini-grid systems**,
-- **Data availability varies**, requiring modular and adaptive modelling.
+---
 
+## 📤 Output Structure
 
+| Folder               | Content Description                                           |
+|---------------------|---------------------------------------------------------------|
+| `Mobility/`         | Flows, distances, and interactive maps for trip modeling      |
+| `ChargingDemand/`   | Charging power by hour and location with HTML maps            |
+| `EVPV/`             | PV production and charging match indicators                    |
 
+---
 
+## 🧪 Advanced Usage
+
+Import EVPV modules into your own scripts:
+```python
+from evpv.vehicle import Vehicle
+from evpv.vehiclefleet import VehicleFleet
+```
+All classes are in the `evpv/` directory, such as `region.py`, `pvsimulator.py`, etc.
+
+---
+
+## ⭐ Features & Limitations
+
+### ✅ Main Features
+- Calibration-free gravity-based mobility demand model ([Lenormand et al. 2015](https://doi.org/10.1016/j.jtrangeo.2015.12.008))
+- State-of-charge-based charging simulation ([Pareschi et al. 2020](https://doi.org/10.1016/j.apenergy.2020.115318))
+- Smart charging ready: basic peak shaving rule available
+- EV–PV synergy KPIs: self-consumption & self-sufficiency
+
+### ❌ Limitations
+- Weekdays only (no weekend behavior modeled)
+- No intermediate stops or multi-purpose trips
+- Limited validation below 5 km² traffic zone resolution
+- PVGIS and OpenRouteService APIs require internet access
+- Assumes closed energy system (PV only powers EVs)
+
+---
+
+## 📄 Scientific Publication
+
+📘 Dumoulin et al. (2025). *A modeling framework to support the electrification of private transport in African cities: a case study of Addis Ababa*. arXiv:2503.03671. [Link](https://doi.org/10.48550/arXiv.2503.03671)
+
+---
 ## 🎥 Step-by-step Video Support
 
 You can find all tutorials on <a href="https://www.youtube.com/playlist?list=PLHN93NPePQ1JPEb3YFsYi3TU__bb_Xcyx" target="_blank" style="text-decoration: none;">
@@ -101,3 +124,12 @@ You can find all tutorials on <a href="https://www.youtube.com/playlist?list=PLH
 ### ❓ Need Help?
 
 Check our [Questions & Answers](docs/faq.md) page for common issues and guidance.
+
+---
+
+## 📜 License
+
+Distributed under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.html).
+
+
+
