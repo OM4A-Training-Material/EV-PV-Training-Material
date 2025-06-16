@@ -18,7 +18,7 @@ The EVPV-simulator provides three key simulation outputs:
 2. **Charging Demand Calculation** – Based on vehicle parameters, SoC logic, and user-defined charging habits (home, work, POIs), the model estimates zone-level and hourly charging needs.
 3. **EV–PV Complementarity** – Calculates hourly PV production using PVLib and evaluates self-consumption/self-sufficiency based on spatial-temporal match with EV charging.
 
-<img src="docs/model_overview_3.png" width="100%">
+<img src="model_overview_3.png" width="100%">
 <p><font size="-1">🔁 EVPV-simulator overview – Not all inputs/outputs shown.</font></p>
 
 ---
