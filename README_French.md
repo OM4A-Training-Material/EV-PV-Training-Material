@@ -2,7 +2,7 @@
 
 ## 📚 Documentation et Matériel de Formation
 
-Le **EVPV-simulator** (simulateur Véhicules Électriques – Photovoltaïque) est un outil open-source en Python développé au laboratoire PV-LAB de l’EPFL pour simuler les besoins de recharge spatiaux et temporels des véhicules électriques (EV) privés et les associer à la production locale d’électricité solaire photovoltaïque (PV). Conçu pour les environnements urbains avec peu de données de mobilité, il combine des données géoréférencées avec des modèles de distribution spatiale des trajets et utilise [PVLib](https://pvlib-python.readthedocs.io/en/stable/) pour la modélisation de la production solaire.
+Le **EVPV-simulator** (Electric Vehicles - Photovoltaics Simulator) est un outil open-source en Python développé au laboratoire PV-LAB de l’EPFL pour simuler les besoins de recharge spatiaux et temporels des véhicules électriques (EV) privés et les associer à la production locale d’électricité solaire photovoltaïque (PV). Conçu pour les environnements urbains avec peu de données de mobilité, il combine des données géoréférencées avec des modèles de distribution spatiale des trajets et utilise [PVLib](https://pvlib-python.readthedocs.io/en/stable/) pour la modélisation de la production solaire.
 
 - 📖 [**Documentation complète**](https://evpv-simulator.readthedocs.io/en/latest/) : guide utilisateur, documentation API et flux de travail
 - 💻 [**GitHub projet**](https://github.com/evpv-simulator) : accès au code source et aux exemples
