@@ -2,9 +2,9 @@
 
 ## 📚 Documentation et Matériel de Formation
 
-Le **EVPV-simulator** (Electric Vehicles - Photovoltaics Simulator) est un outil open-source en Python développé au laboratoire PV-LAB de l’EPFL pour simuler les besoins de recharge spatiaux et temporels des véhicules électriques (EV) privés et les associer à la production locale d’électricité solaire photovoltaïque (PV). Conçu pour les environnements urbains avec peu de données de mobilité, il combine des données géoréférencées avec des modèles de distribution spatiale des trajets et utilise [PVLib](https://pvlib-python.readthedocs.io/en/stable/) pour la modélisation de la production solaire.
+**EVPV-simulator** (Electric Vehicles - Photovoltaics Simulator) est un outil open-source en Python développé au laboratoire PV-LAB de l’EPFL pour simuler les besoins de recharge spatiaux et temporels des véhicules électriques (EV) privés et estimer les synergies avec la production solaire photovoltaïque (PV). Conçu spécifiquement pour les environnements avec peu de données de mobilité, il combine des données géoréférencées open-source avec des modèles de demande de transport, tout en se basant sur [PVLib](https://pvlib-python.readthedocs.io/en/stable/) pour la modélisation du productible solaire.
 
-- 📖 [**Documentation complète**](https://evpv-simulator.readthedocs.io/en/latest/) : guide utilisateur, documentation API et flux de travail
+- 📖 [**Documentation complète**](https://evpv-simulator.readthedocs.io/en/latest/) : guide utilisateur, documentation API et exemples d'utilisation
 - 💻 [**GitHub projet**](https://github.com/evpv-simulator) : accès au code source et aux exemples
 - 🐍 Langage : Python 3.12
 
@@ -14,12 +14,12 @@ Le **EVPV-simulator** (Electric Vehicles - Photovoltaics Simulator) est un outil
 
 Le simulateur EVPV fournit trois sorties de simulation principales :
 
-1. **Estimation de la demande de mobilité** – À l’aide de la densité de population, des lieux de travail et des POI (points d’intérêt), la ville est divisée en zones de trafic et les trajets domicile-travail sont simulés.
-2. **Calcul de la demande de recharge** – Basé sur les paramètres du véhicule, la logique de l’état de charge (SoC) et les habitudes de recharge définies par l’utilisateur (domicile, travail, POI), le modèle estime les besoins de recharge par zone et par heure.
-3. **Complémentarité EV–PV** – Calcule la production PV horaire avec PVLib et évalue l’autoconsommation et l’autosuffisance selon la correspondance spatio-temporelle avec la recharge des VE.
+1. **Estimation de la demande de mobilité** – À l’aide de la densité de population, des lieux de travail et des POI (points d’intérêt), la zone d'intérêt est divisée en zones de trafic et les trajets domicile-travail sont simulés.
+2. **Calcul de la demande de recharge** – Basé sur les paramètres du véhicule, l’état de charge (SoC) et les habitudes de recharge définies par l’utilisateur (domicile, travail, POI), le modèle estime les besoins de recharge par zone.
+3. **Complémentarité EV–PV** – Calcule la production PV horaire avec PVLib et évalue l’autoconsommation et l’autosuffisance selon la complémentarité entre la production et la demande.
 
 <img src="model_overview_3.png" width="100%">
-<p><font size="-1">🔁 Vue d’ensemble d’EVPV-simulator – Tous les intrants/sorties ne sont pas affichés.</font></p>
+<p><font size="-1">🔁 Vue d’ensemble d’EVPV-simulator – Toutes les entrées/sorties ne sont pas affichées.</font></p>
 
 ---
 
@@ -47,7 +47,7 @@ pip install git+https://github.com/evpv-simulator/evpv.git
 
 ### 🔹 Étape 1 : Préparez votre fichier de configuration
 - Copiez et adaptez l’exemple d’Addis-Abeba : [exemple Addis Abeba](https://github.com/evpv-simulator/evpv-examples)
-- Assurez-vous que les données géospatiales sont prêtes : frontières régionales, raster de population, liste des lieux de travail, POI
+- Assurez-vous que les données géospatiales sont prêtes : frontière de la région d'intérêt, raster de population, liste des lieux de travail, POI
 
 ### 🔹 Étape 2 : Lancez le modèle en ligne de commande
 ```bash
@@ -63,8 +63,8 @@ Puis entrez le chemin vers votre fichier de configuration lorsqu’il est demand
 
 ## 🗂️ Données d’entrée requises
 
-- **Frontière régionale** : fichier GeoJSON provenant de sources comme [GADM](https://gadm.org)
-- **Densité de population** : raster issu de [GHS-POP](https://human-settlement.emergency.copernicus.eu)
+- **Frontière de la région d'intérêt** : fichier GeoJSON provenant de sources comme [GADM](https://gadm.org)
+- **Densité de population** : raster issu par exemple de [GHS-POP](https://human-settlement.emergency.copernicus.eu)
 - **Lieux de travail & POI** : fichier CSV avec latitude/longitude et pondérations. Peut être généré automatiquement via un script OSM.
 
 ---
@@ -93,17 +93,17 @@ Toutes les classes sont dans le répertoire `evpv/`, telles que `region.py`, `pv
 ## ⭐ Fonctionnalités et Limitations
 
 ### ✅ Fonctionnalités principales
-- Modèle de demande de mobilité basé sur la gravité, sans calibration ([Lenormand et al. 2015](https://doi.org/10.1016/j.jtrangeo.2015.12.008))
+- Modèle de demande de mobilité basé sur un modèle gravitaire, ne nécessitant pas de calibration ([Lenormand et al. 2015](https://doi.org/10.1016/j.jtrangeo.2015.12.008))
 - Simulation de recharge basée sur l’état de charge ([Pareschi et al. 2020](https://doi.org/10.1016/j.apenergy.2020.115318))
-- Prêt pour la recharge intelligente : règle simple de lissage des pics disponible
-- Indicateurs de synergie EV–PV : autoconsommation et autosuffisance
+- Prêt pour la recharge intelligente : algorithme de "peak shaving" disponible
+- Indicateurs de synergie EV–PV : autoconsommation et autosuffisance, etc
 
 ### ❌ Limitations
 - Jours de semaine uniquement (pas de comportement week-end)
-- Pas d’arrêts intermédiaires ni de trajets multi-usages
-- Validation limitée pour les zones de trafic inférieures à 5 km²
+- Pas d’arrêts intermédiaires ni de trajets multi-modaux
+- Limitation dans l'utilisation du modèle gravitaire pour les petites zones de trafic 
 - Les API PVGIS et OpenRouteService nécessitent une connexion Internet
-- Suppose un système énergétique fermé (le PV alimente uniquement les EV)
+- Suppose que toute l'énergie PV est utilisée pour la recharge PV (pas d'autres sources de demande)
 
 ---
 
