@@ -109,7 +109,7 @@ All classes are in the `evpv/` directory, such as `region.py`, `pvsimulator.py`,
 
 ## 📄 Scientific Publication
 
-📘 Dumoulin et al. (2025). *A modeling framework to support the electrification of private transport in African cities: a case study of Addis Ababa*. arXiv:2503.03671. [Link](https://doi.org/10.48550/arXiv.2503.03671)
+📘 Dumoulin et al. (2025). *A modeling framework to support the electrification of private transport in African cities: A case study of Addis Ababa*. African Transportation Research, 100064. [Link](https://www.sciencedirect.com/science/article/pii/S2950196225000420)
 
 ---
 ## 🎥 Step-by-step Video Support
