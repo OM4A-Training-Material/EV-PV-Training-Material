@@ -1,0 +1,75 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Eazy Power Charging Station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.7675942157046, 9.006318747070281]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Total Energy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.772126133596444, 9.000735845308288]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ethio Telecom"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.801945350088516, 9.007798735360444]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Unknown"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.79459188664894, 8.996489849982218]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Unknown"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.81331394007094, 9.022183440263884]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Unknown"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.752422500117284, 9.029013168892531]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Unknown"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.75486388156778, 9.013889523152297]
+      }
+    }
+  ]
+}
